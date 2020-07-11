@@ -1,0 +1,130 @@
+$primary-color: #f8fafd;
+$primary-font: OpenSans-Regular;
+$primary-font-weight: 400;
+$primary-font-color: #76a6ef;
+
+.outerContainer {
+  flex: 1;
+  flex-direction: column;
+  background-color: $primary-color;
+}
+
+.adsBanner {
+  background-color: $primary-color;
+  width: 100%;
+  height: 10%;
+}
+
+.adsBannerText {
+  color: #707070;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.headerBar {
+  background-color: $primary-font-color;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.headerText {
+  color: $primary-color;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 28px;
+  margin-left: 25%;
+}
+
+.tagsText {
+  font-family: OpenSans-SemiBold;
+  font-weight: 600;
+  font-size: 29px;
+  color: #000000;
+  margin-top: 12%;
+  text-align: center;
+}
+
+.cardStyle {
+  width: 90%;
+  height: 30%;
+  background-color: #ffffff;
+  margin-top: 10%;
+  border-color: #91B1E7;
+  border-width: 1.5px;
+  border-radius: 10px;
+  align-self: center;
+}
+
+.frameStyle {
+  width: 90%;
+  height: 100%;
+  align-self: center;
+  background-color: transparent;
+}
+
+.nextAndPrevButtonIcon {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.checkCircleIcon {
+  background-color: $primary-font-color;
+  border-radius: 9px;
+  border-width: 1px;
+  border-color: #707070;
+}
+
+.alignTextAndIcon {
+  display: flex;
+  flex-direction: row;
+}
+
+.selectText {
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 14px;
+  color: $primary-color;
+  margin-right: 4px;
+}
+
+.selectButton {
+  width: 86px;
+  height: 4.5%;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin-top: 4%;
+  background-color: $primary-font-color;
+}
+
+.carouselStyle {
+  width: 130px;
+  height: 80px;
+  background-color: #ffffff;
+  margin-top: 5%;
+  margin-bottom: 12%;
+  border-color: $primary-font-color;
+  border-width: 0.3px;
+  border-radius: 10px;
+  align-self: center;
+}
+
+.carouselLayout {
+  margin-top: 8%;
+  align-items: center;
+}
+
+.smallFrame {
+  width: 130px;
+  height: 80px;
+}

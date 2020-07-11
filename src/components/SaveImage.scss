@@ -1,0 +1,114 @@
+$primary-color: #f8fafd;
+$primary-font: OpenSans-Regular;
+$primary-font-weight: 400;
+$primary-font-color: #76a6ef;
+
+.outerContainer {
+  flex: 1;
+  flex-direction: column;
+  background-color: $primary-color;
+}
+
+.adsBanner {
+  background-color: $primary-color;
+  width: 100%;
+  height: 10%;
+}
+
+.adsBannerText {
+  color: #707070;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.headerBar {
+  background-color: $primary-font-color;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.headerText {
+  color: $primary-color;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 28px;
+  margin-left: 25%;
+}
+
+.saveAndShareText {
+  font-family: OpenSans-SemiBold;
+  font-weight: 600;
+  font-size: 29px;
+  color: #000000;
+  margin-top: 12%;
+  text-align: center;
+}
+
+.cardStyle {
+  width: 55%;
+  height: 19%;
+  background-color: #ffffff;
+  margin-top: 10%;
+  border-color: #91b1e7;
+  border-width: 1.5px;
+  border-radius: 10px;
+  align-self: center;
+}
+
+.frameDetailsText {
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.alignFrameDetailsText {
+  margin-top: 7%;
+  margin-left: 23%;
+}
+
+.saveIconLayout {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-font-color;
+  border-color: #707070;
+  border-width: 1px;
+}
+
+.shareIconLayout {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-font-color;
+  border-color: #707070;
+  border-width: 1px;
+}
+
+.alignButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 7%;
+}
+
+.alignButtonText {
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  color: #000000;
+  text-align: center;
+}

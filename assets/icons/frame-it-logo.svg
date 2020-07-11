@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286.404" height="339.825" viewBox="0 0 286.404 339.825">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #76a6ef;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 20px;
+      }
+    </style>
+  </defs>
+  <g id="Logo" transform="translate(-185.906 -432.921)">
+    <g id="Crop-svg" transform="translate(196 443)">
+      <g id="crop">
+        <path id="Path_1" data-name="Path 1" class="cls-1" d="M7.738,1,6,219.009c0,16.054,11.969,29.068,26.733,29.068h200.5" transform="translate(33.082 -1)"/>
+        <path id="Path_2" data-name="Path 2" class="cls-1" d="M1,7.889,201.5,6c14.764,0,26.733,13.014,26.733,29.068V253.077" transform="translate(-1 66.67)"/>
+      </g>
+    </g>
+    <g id="Image-svg" transform="translate(279.435 553.167)">
+      <g id="image">
+        <rect id="Rectangle_1" data-name="Rectangle 1" class="cls-1" width="99" height="99" rx="2" transform="translate(-0.435 -0.167)"/>
+        <ellipse id="Ellipse_1" data-name="Ellipse 1" class="cls-1" cx="8.5" cy="8" rx="8.5" ry="8" transform="translate(21.565 22.833)"/>
+        <path id="Path_3" data-name="Path 3" class="cls-1" d="M91.852,37.141,64.711,10,5,69.711" transform="translate(5.857 28.782)"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,113 @@
+$primary-color: #f8fafd;
+$primary-font: OpenSans-Regular;
+$primary-font-weight: 400;
+$primary-font-color: #76a6ef;
+
+.outerContainer {
+  flex: 1;
+  flex-direction: column;
+  background-color: $primary-color;
+}
+
+.adsBanner {
+  background-color: $primary-color;
+  width: 100%;
+  height: 10%;
+}
+
+.adsBannerText {
+  color: #707070;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.headerBar {
+  background-color: $primary-font-color;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.headerText {
+  color: $primary-color;
+  font-family: $primary-font;
+  font-weight: $primary-font-weight;
+  font-size: 28px;
+}
+
+.tagsFirstText {
+  font-family: OpenSans-SemiBold;
+  font-weight: 600;
+  font-size: 29px;
+  color: #000000;
+  margin-top: 7%;
+  margin-bottom: 5px;
+}
+
+.tagsText {
+  font-family: OpenSans-SemiBold;
+  font-weight: 600;
+  font-size: 29px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+.frameStyle {
+  width: 185px;
+  height: 105px;
+  align-self: center;
+  background-color: transparent;
+}
+
+.cardStyle {
+  width: 175px;
+  height: 105px;
+  background-color: #ffffff;
+  margin: 12px;
+  border-color: $primary-font-color;
+  border-width: 0.3px;
+  border-radius: 10px;
+}
+
+.spaceTagsContent {
+  margin-left: 5%;
+}
+
+.spaceTagsLastContent {
+  margin-left: 5%;
+  margin-bottom: 50%;
+}
+
+.search {
+  flex: 1;
+  flex-direction: row;
+  height: 40;
+  border-radius: 5px;
+  background-color: #f8fafd;
+}
+
+.cancelSearch {
+  position: absolute;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.cancelSearchText {
+  color: $primary-color;
+}
+
+.searchInputStyle {
+  flex: 1;
+  color: black;
+  margin-left: 6px;
+}

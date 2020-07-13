@@ -15,11 +15,22 @@ import BackButtonIcon from '../../assets/icons/angle-left.svg';
 import styles from './AdjustPicture.scss';
 import UndoIcon from '../../assets/icons/undo-alt.svg';
 import CheckCircleIcon from '../../assets/icons/check-circle.svg';
+import ViewShot from 'react-native-view-shot';
+import CameraRoll from '@react-native-community/cameraroll';
 
 export default function AdjustPicture({route, navigation}) {
+  const onPressSetPrevPan = () => {
+    pan.setValue({x: 0, y: 0});
+  };
   const {imageSource} = route.params;
   const onPressFramePreview = () => navigation.navigate('FramePreview');
-  const onPressSaveImage = () => navigation.navigate('SaveImage');
+  const viewShot = useRef();
+  const onPressRouteSaveImage = () => {
+    viewShot.current.capture().then((uri) => {
+      console.log('The uri for captured view is ', uri);
+      navigation.navigate('SaveImage', {uri: uri});
+    });
+  };
   const pan = useRef(new Animated.ValueXY()).current;
   const panResponder = useRef(
     PanResponder.create({
@@ -30,9 +41,12 @@ export default function AdjustPicture({route, navigation}) {
           y: pan.y._value,
         });
       },
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {useNativeDriver: false}),
+      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
+        useNativeDriver: false,
+      }),
       onPanResponderRelease: () => {
         pan.flattenOffset();
+        console.log(pan.x);
       },
     }),
   ).current;
@@ -54,22 +68,28 @@ export default function AdjustPicture({route, navigation}) {
         <Text style={styles.adjustPictureText}>Adjust Picture</Text>
       </View>
       <View style={[stylesPlus.addFrameShadow, styles.cardStyle]}>
-        <Animated.View
-          style={{
-            transform: [{translateX: pan.x}, {translateY: pan.y}],
-          }}
-          {...panResponder.panHandlers}>
-          <Image
-            source={imageSource}
-            resizeMethod="scale"
-            resizeMode="contain"
-            style={styles.adjustPictureImage}
-          />
-        </Animated.View>
+        <ViewShot
+          ref={viewShot}
+          options={{format: 'png'}}>
+          <Animated.View
+            style={{
+              transform: [{translateX: pan.x}, {translateY: pan.y}],
+            }}
+            {...panResponder.panHandlers}>
+            <Image
+              source={imageSource}
+              resizeMethod="scale"
+              resizeMode="contain"
+              style={styles.adjustPictureImage}
+            />
+          </Animated.View>
+        </ViewShot>
       </View>
       <View style={styles.alignButtons}>
         <View>
-          <TouchableOpacity style={styles.undoIconLayout}>
+          <TouchableOpacity
+            style={styles.undoIconLayout}
+            onPress={onPressSetPrevPan}>
             <UndoIcon
               width={33}
               height={33}
@@ -80,7 +100,7 @@ export default function AdjustPicture({route, navigation}) {
           <Text style={styles.alignButtonText}>Undo</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={onPressSaveImage}>
+          <TouchableOpacity onPress={onPressRouteSaveImage}>
             <CheckCircleIcon width={58} height={58} fill="#76A6EF" />
           </TouchableOpacity>
           <Text style={styles.alignButtonText}>Proceed</Text>

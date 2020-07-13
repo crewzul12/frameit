@@ -100,6 +100,8 @@ target 'FrameIt' do
 
   pod 'Interactable', :path => '../node_modules/react-native-interactable'
 
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
   target 'FrameItTests' do
     inherit! :complete
     # Pods for testing

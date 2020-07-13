@@ -1,8 +1,12 @@
 package com.frameit;
+import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import cl.json.RNSharePackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

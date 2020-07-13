@@ -62,24 +62,33 @@ export default function DiscoverFrame({navigation}) {
       ]).start();
     };
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    let unmounted = false;
+    let source = axios.CancelToken.source();
     axios
-      .get('https://frameitdjangorestapi.herokuapp.com/api/elements/')
+      .get('https://frameitdjangorestapi.herokuapp.com/api/elements/', {
+        cancelToken: source.token,
+      })
       .then(function (response) {
         // handle success
-        setElement(response.data);
+        if (!unmounted) {
+          setElement(response.data);
+        }
       })
       .catch(function (error) {
-        if (Axios.isCancel(error)) {
-        } else {
-          throw error;
+        if (!unmounted) {
+          if (axios.isCancel(e)) {
+            console.log('request cancelled');
+          } else {
+            console.log('another error happened');
+          }
         }
       })
       .finally(function () {
         // always executed
       });
-    return () => {
-      source.cancel();
+    return function () {
+      unmounted = true;
+      source.cancel('Cancelling in cleanup');
     };
   }, []);
   return (

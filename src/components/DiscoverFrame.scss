@@ -78,15 +78,6 @@ $primary-font-color: #76a6ef;
   border-radius: 10px;
 }
 
-.spaceTagsContent {
-  margin-left: 5%;
-}
-
-.spaceTagsLastContent {
-  margin-left: 5%;
-  margin-bottom: 50%;
-}
-
 .search {
   flex: 1;
   flex-direction: row;
@@ -110,4 +101,10 @@ $primary-font-color: #76a6ef;
   flex: 1;
   color: black;
   margin-left: 6px;
+}
+
+.spaceTagsContent {
+  margin-bottom: 50%;
+  margin-left: 5%;
+  margin-top: 6%;
 }

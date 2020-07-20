@@ -1,7 +1,8 @@
 {
-  "name": "FrameIt",
-  "version": "0.0.1",
-  "private": true,
+  "name": "frameit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -9,18 +10,32 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crewzul12/frameit.git"
+  },
+  "author": "Muhammad Zulhusni Bin Zakaria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crewzul12/frameit/issues"
+  },
+  "homepage": "https://github.com/crewzul12/frameit#readme",
   "dependencies": {
     "@react-native-community/cameraroll": "^4.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.0",
     "@react-navigation/stack": "^5.7.0",
     "axios": "^0.19.2",
+    "babel-plugin-dotenv-import": "^2.1.0",
     "css-to-react-native-transform": "^1.9.0",
+    "fs": "0.0.1-security",
     "node-sass": "^4.14.1",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react": "^16.13.1",
+    "react-native": "^0.63.1",
+    "react-native-dotenv": "^2.2.0",
     "react-native-gesture-handler": "^1.6.1",
-    "react-native-image-picker": "^2.3.2",
+    "react-native-image-picker": "^2.3.3",
+    "react-native-image-resizer": "^1.2.3",
     "react-native-modal": "^11.5.6",
     "react-native-permissions": "^2.1.5",
     "react-native-reanimated": "^1.9.0",
@@ -36,16 +51,17 @@
     "react-native-view-shot": "^3.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/runtime": "^7.10.4",
+    "@babel/core": "^7.10.5",
+    "@babel/runtime": "^7.10.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.1.0",
     "babel-plugin-react-native-classname-to-style": "^1.2.2",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "jest": "^26.1.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.11.0"
+    "jetifier": "^1.6.6",
+    "metro-react-native-babel-preset": "^0.60.0",
+    "react-test-renderer": "^16.13.1"
   },
   "jest": {
     "preset": "react-native"

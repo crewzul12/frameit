@@ -16,18 +16,18 @@ import styles from './AdjustPicture.scss';
 import UndoIcon from '../../assets/icons/undo-alt.svg';
 import CheckCircleIcon from '../../assets/icons/check-circle.svg';
 import ViewShot from 'react-native-view-shot';
-import CameraRoll from '@react-native-community/cameraroll';
 
 export default function AdjustPicture({route, navigation}) {
-  const onPressSetPrevPan = () => {
+  async function onPressSetPrevPan() {
     pan.setValue({x: 0, y: 0});
-  };
-  const {imageSource} = route.params;
+    panFrame.setValue({x: 0, y: 0});
+  }
+  const {imageSource, elementSource} = route.params;
+ 
   const onPressFramePreview = () => navigation.navigate('FramePreview');
   const viewShot = useRef();
   const onPressRouteSaveImage = () => {
     viewShot.current.capture().then((uri) => {
-      console.log('The uri for captured view is ', uri);
       navigation.navigate('SaveImage', {uri: uri});
     });
   };
@@ -45,8 +45,28 @@ export default function AdjustPicture({route, navigation}) {
         useNativeDriver: false,
       }),
       onPanResponderRelease: () => {
-        pan.flattenOffset();
-        console.log(pan.x);
+        pan.flattenOffset();  
+      },
+    }),
+  ).current;
+  const panFrame = useRef(new Animated.ValueXY()).current;
+  const panResponderFrame = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        panFrame.setOffset({
+          x: panFrame.x._value,
+          y: panFrame.y._value,
+        });
+      },
+      onPanResponderMove: Animated.event(
+        [null, {dx: panFrame.x, dy: panFrame.y}],
+        {
+          useNativeDriver: false,
+        },
+      ),
+      onPanResponderRelease: () => {
+        panFrame.flattenOffset();
       },
     }),
   ).current;
@@ -68,17 +88,33 @@ export default function AdjustPicture({route, navigation}) {
         <Text style={styles.adjustPictureText}>Adjust Picture</Text>
       </View>
       <View style={[stylesPlus.addFrameShadow, styles.cardStyle]}>
-        <ViewShot
-          ref={viewShot}
-          options={{format: 'png'}}>
+        <ViewShot ref={viewShot} options={{format: 'png'}}>
           <Animated.View
-            style={{
-              transform: [{translateX: pan.x}, {translateY: pan.y}],
-            }}
+            style={[
+              {
+                transform: [{translateX: panFrame.x}, {translateY: panFrame.y}],
+              },
+              styles.smallFrame,
+            ]}
+            {...panResponderFrame.panHandlers}>
+            <Image
+              source={{uri: elementSource}}
+              resizeMethod="resize"
+              resizeMode="cover"
+              style={[styles.smallFrame]}
+            />
+          </Animated.View>
+          <Animated.View
+            style={[
+              {
+                transform: [{translateX: pan.x}, {translateY: pan.y}],
+              },
+              styles.adjustPictureImage,
+            ]}
             {...panResponder.panHandlers}>
             <Image
               source={imageSource}
-              resizeMethod="scale"
+              resizeMethod="resize"
               resizeMode="contain"
               style={styles.adjustPictureImage}
             />

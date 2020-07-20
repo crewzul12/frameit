@@ -91,4 +91,12 @@ $primary-font-color: #76a6ef;
 .adjustPictureImage {
   width: 100%;
   height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.smallFrame {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 }

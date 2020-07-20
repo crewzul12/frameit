@@ -20,8 +20,8 @@ import Carousel from 'react-native-snap-carousel';
 import ImagePicker from 'react-native-image-picker';
 
 export default function FramePreview({route, navigation}) {
-  const {tag, element} = route.params; //receive parameter from DiscoverFrame component
-  const onPressDiscoverFrame = () => navigation.navigate('DiscoverFrame');
+  const {tag, element} = route.params; // receive parameter from DiscoverFrame component
+  const onPressDiscoverFrame = () => navigation.navigate('DiscoverFrame'); // navigate to Discover Frame page
   const options = {
     title: 'Choose your image',
     storageOptions: {
@@ -29,6 +29,11 @@ export default function FramePreview({route, navigation}) {
       path: 'images',
     },
   };
+  const passElement = [];
+  element.map((data) => {
+    data.element_tag === tag ? passElement.push(data) : null;
+  });
+  const [elementSource, setElementSource] = React.useState();
   const onPressAdjustPicture = () => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
@@ -39,18 +44,36 @@ export default function FramePreview({route, navigation}) {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: `${response.uri}`};
+        const source = {uri: `${response.uri}`}; // source of user image in device storage
         // You can also display the image using data:
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-        navigation.navigate('AdjustPicture', {imageSource: source});
+        navigation.navigate('AdjustPicture', {
+          imageSource: source,
+          elementSource: elementSource,
+        });
+        console.log(elementSource);
       }
     });
   };
-  const passElement = [];
-  element.map((data) => {
-    data.element_tag === tag ? passElement.push(data) : null;
-  });
+  const swiper = useRef(); // ref for Swiper component
+  const carousel = useRef(); // ref for Carousel component to be used in next and previous frame button
+  const [frameCurrIndex, setFrameCurrIndex] = React.useState(0);
+  async function onPressNextFrameButton() {
+    carousel.current.snapToNext();
+    swiper.current.scrollBy(1); // swipe frame to next frame
+    setFrameCurrIndex(frameCurrIndex + 1);
+    console.log(frameCurrIndex);
+  }
+  async function onPressPrevFrameButton() {
+    carousel.current.snapToPrev();
+    swiper.current.scrollBy(-1); // swiper frame to previous frame
+    setFrameCurrIndex(frameCurrIndex - 1);
+    console.log(frameCurrIndex);
+  }
   const renderFrames = ({item, index}) => {
+    if (frameCurrIndex === index) {
+      setElementSource(item.element_img);
+    }
     return item.element_tag === tag ? (
       <TouchableOpacity
         style={[styles.carouselStyle, stylesPlus.addFrameShadow]}>
@@ -82,8 +105,10 @@ export default function FramePreview({route, navigation}) {
       </View>
       <View style={[stylesPlus.addFrameShadow, styles.cardStyle]}>
         <Swiper
-          autoplay={true}
+          ref={swiper}
           showsPagination={false}
+          loop={false}
+          scrollEnabled={false}
           nextButton={
             <NextButtonIcon
               fill="#76A6EF"
@@ -91,6 +116,7 @@ export default function FramePreview({route, navigation}) {
               strokeWidth={10}
               width={30}
               height={30}
+              onPress={onPressNextFrameButton}
               style={styles.nextAndPrevButtonIcon}
             />
           }
@@ -101,6 +127,7 @@ export default function FramePreview({route, navigation}) {
               strokeWidth={10}
               width={30}
               height={30}
+              onPress={onPressPrevFrameButton}
               style={styles.nextAndPrevButtonIcon}
             />
           }
@@ -123,15 +150,15 @@ export default function FramePreview({route, navigation}) {
       <View style={styles.carouselLayout}>
         <Carousel
           enableMomentum={true}
-          autoplay={true}
-          autoplayDelay={1000}
-          autoplayInterval={1000}
           layout={'default'}
+          ref={carousel}
           renderItem={renderFrames}
           data={passElement}
           sliderWidth={400}
           itemWidth={150}
           inactiveSlideOpacity={1}
+          loop={false}
+          scrollEnabled={false}
         />
       </View>
       <TouchableOpacity

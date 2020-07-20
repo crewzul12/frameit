@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import FrameItLogo from './assets/icons/frame-it-logo.svg';
@@ -13,7 +13,7 @@ import {PERMISSIONS, request, requestMultiple} from 'react-native-permissions';
 import FramePreview from './src/components/FramePreview';
 import AdjustPicture from './src/components/AdjustPicture';
 import SaveImage from './src/components/SaveImage';
-
+LogBox.ignoreAllLogs();
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -33,7 +33,7 @@ const Home = ({navigation}) => {
     }
     return function cleanup() {
       mounted = false;
-    }
+    };
   });
   return (
     <View style={styles.outerContainer}>

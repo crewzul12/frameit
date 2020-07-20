@@ -9,27 +9,28 @@ import Modal from 'react-native-modal';
 import Share from 'react-native-share';
 
 export default function SaveImage({route, navigation}) {
-  const {uri} = route.params;
+  const {uri} = route.params; // Receiver params from AdjustPicture component
   const [isModalVisible, setIsModalVisible] = useState(false);
   const onPressSaveImage = () => {
-    CameraRoll.save(uri)
+    CameraRoll.save(uri) // Save image to gallery
       .then(() => {
         console.log('Image saved to gallery');
       })
       .catch((error) => {
         console.log(error);
       });
-    setIsModalVisible(true);
+    setIsModalVisible(true); // show modal message
     console.log(uri);
   };
   const toggleModalOff = () => setIsModalVisible(false);
-  const onPressAdjustPicture = () => navigation.navigate('AdjustPicture');
+  const onPressAdjustPicture = () => navigation.navigate('AdjustPicture'); // Navigate to Adjust Picture page
   const onPressShare = () => {
     Share.open({
       message: `This is my picture that edited by me using Frame-It! app.`,
       title: 'Frame-It! Share Feature',
       subject: 'Frame-It! app feature',
       url: uri,
+      showAppsToView: true
     })
       .then((res) => {
         console.log(res);

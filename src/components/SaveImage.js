@@ -9,7 +9,7 @@ import Modal from 'react-native-modal';
 import Share from 'react-native-share';
 
 export default function SaveImage({route, navigation}) {
-  const {uri} = route.params; // Receiver params from AdjustPicture component
+  const {uri, elementName} = route.params; // Receiver params from AdjustPicture component
   const [isModalVisible, setIsModalVisible] = useState(false);
   const onPressSaveImage = () => {
     CameraRoll.save(uri) // Save image to gallery
@@ -30,7 +30,7 @@ export default function SaveImage({route, navigation}) {
       title: 'Frame-It! Share Feature',
       subject: 'Frame-It! app feature',
       url: uri,
-      showAppsToView: true
+      showAppsToView: true,
     })
       .then((res) => {
         console.log(res);
@@ -39,6 +39,12 @@ export default function SaveImage({route, navigation}) {
         err && console.log(err);
       });
   };
+  var date = new Date().getDate(); //Current Date
+  var month = new Date().getMonth() + 1; //Current Month
+  var year = new Date().getFullYear(); //Current Year
+  var hours = new Date().getHours(); //Current Hours
+  var min = new Date().getMinutes(); //Current Minutes
+  var sec = new Date().getSeconds(); //Current Seconds
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>
@@ -65,10 +71,11 @@ export default function SaveImage({route, navigation}) {
         />
       </View>
       <View style={styles.alignFrameDetailsText}>
-        <Text style={styles.frameDetailsText}>Name:</Text>
-        <Text style={styles.frameDetailsText}>Date:</Text>
-        <Text style={styles.frameDetailsText}>Time:</Text>
-        <Text style={styles.frameDetailsText}>Frame:</Text>
+        <Text style={styles.frameDetailsText}>
+          Date Created: {date + '/' + month + '/' + year}
+        </Text>
+        <Text style={styles.frameDetailsText}>Time Created: {hours + ':' + min + ':' + sec}</Text>
+        <Text style={styles.frameDetailsText}>Frame: {elementName}</Text>
       </View>
       <View style={styles.alignButtons}>
         <View>

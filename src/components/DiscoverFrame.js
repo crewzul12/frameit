@@ -14,6 +14,7 @@ import styles from './DiscoverFrame.scss';
 import BackButtonIcon from '../../assets/icons/angle-left.svg';
 import SearchIcon from '../../assets/icons/search.svg';
 import {REACT_APP_API_KEY} from '@env';
+import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 const axios = require('axios');
 
 const {width} = Dimensions.get('window');
@@ -40,6 +41,7 @@ export default function DiscoverFrame({navigation}) {
   const handleFocusTextInput = () => {
     setSearchActive(true);
   };
+  const [loading, setLoading] = useState(true); // Loading state for skeleton component
   const inputLength = new Animated.Value(SEARCH_FULL_WIDTH),
     onFocus = () => {
       Animated.parallel([
@@ -60,6 +62,7 @@ export default function DiscoverFrame({navigation}) {
         }),
       ]).start();
     };
+
   useEffect(() => {
     let unmounted = false;
     let source = axios.CancelToken.source();
@@ -74,6 +77,7 @@ export default function DiscoverFrame({navigation}) {
       .then(function (response) {
         // handle success
         if (!unmounted) {
+          setLoading(false);
           setElement(response.data);
         }
       })
@@ -98,7 +102,6 @@ export default function DiscoverFrame({navigation}) {
   const displayNonDupsTags = new Set();
   const [searchTags, setSearchTags] = useState(''); // Search keyword state
   const handleSearchTags = (event) => {
-    console.log(event.nativeEvent.text);
     setSearchTags(event.nativeEvent.text);
   };
   let filteredTag = tags.filter((tag) => {
@@ -157,59 +160,71 @@ export default function DiscoverFrame({navigation}) {
           />
         </View>
       )}
-      <ScrollView scrollEventThrottle={16}>
-        <View style={styles.spaceTagsContent}>
-          {element
-            ? element.map((el) => {
-                filteredTag.map((t) => {
-                  el.element_tag === t && el.element_tag
-                    ? displayNonDupsTags.add(t)
-                    : null;
-                  tagsNonNull = [...displayNonDupsTags];
-                });
-              })
-            : null}
-          {element && tags
-            ? tagsNonNull.map((data) => {
-                return (
-                  <View key={data}>
-                    <Text style={styles.tagsText}>{data}</Text>
-                    <ScrollView
-                      showsHorizontalScrollIndicator={false}
-                      scrollEventThrottle={16}
-                      horizontal={true}>
-                      {element
-                        ? element.map((item) => {
-                            return item.element_tag === data ? (
-                              <TouchableOpacity
-                                style={[
-                                  stylesPlus.addFrameShadow,
-                                  styles.cardStyle,
-                                ]}
-                                onPress={() => {
-                                  navigation.navigate('FramePreview', {
-                                    tag: data,
-                                    element: element,
-                                  });
-                                }}
-                                key={item.id}>
-                                <Image
-                                  resizeMethod="auto"
-                                  resizeMode="contain"
-                                  style={styles.frameStyle}
-                                  source={{uri: item.element_img}}
-                                />
-                              </TouchableOpacity>
-                            ) : null;
-                          })
-                        : null}
-                    </ScrollView>
-                  </View>
-                );
-              })
-            : null}
-        </View>
-      </ScrollView>
+      <SkeletonContent
+        containerStyle={{flex: 1}}
+        isLoading={loading}
+        layout={[
+          {key: 'loadingTags', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
+          {key: 'loadingFrames', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
+          {key: 'loadingTags2', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
+          {key: 'loadingFrames2', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
+          {key: 'loadingTags3', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
+          {key: 'loadingFrames3', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
+        ]}>
+        <ScrollView scrollEventThrottle={16}>
+          <View style={styles.spaceTagsContent}>
+            {element
+              ? element.map((el) => {
+                  filteredTag.map((t) => {
+                    el.element_tag === t && el.element_tag
+                      ? displayNonDupsTags.add(t)
+                      : null;
+                    tagsNonNull = [...displayNonDupsTags];
+                  });
+                })
+              : null}
+            {element && tags
+              ? tagsNonNull.map((data) => {
+                  return (
+                    <View key={data}>
+                      <Text style={styles.tagsText}>{data}</Text>
+                      <ScrollView
+                        showsHorizontalScrollIndicator={false}
+                        scrollEventThrottle={16}
+                        horizontal={true}>
+                        {element
+                          ? element.map((item) => {
+                              return item.element_tag === data ? (
+                                <TouchableOpacity
+                                  style={[
+                                    stylesPlus.addFrameShadow,
+                                    styles.cardStyle,
+                                  ]}
+                                  onPress={() => {
+                                    navigation.navigate('FramePreview', {
+                                      tag: data,
+                                      element: element,
+                                    });
+                                  }}
+                                  key={item.id}>
+                                  <Image
+                                    resizeMethod="auto"
+                                    resizeMode="contain"
+                                    style={styles.frameStyle}
+                                    source={{uri: item.element_img}}
+                                  />
+                                </TouchableOpacity>
+                              ) : null;
+                            })
+                          : null}
+                      </ScrollView>
+                    </View>
+                  );
+                })
+              : null}
+          </View>
+        </ScrollView>
+      </SkeletonContent>
     </View>
   );
 }

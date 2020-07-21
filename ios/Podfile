@@ -49,7 +49,8 @@ target 'FrameIt' do
   # … 
  
   permissions_path = '../node_modules/react-native-permissions/ios'
- 
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
   pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral.podspec"
   pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars.podspec"
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"

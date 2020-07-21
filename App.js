@@ -13,7 +13,7 @@ import {PERMISSIONS, request, requestMultiple} from 'react-native-permissions';
 import FramePreview from './src/components/FramePreview';
 import AdjustPicture from './src/components/AdjustPicture';
 import SaveImage from './src/components/SaveImage';
-LogBox.ignoreAllLogs();
+
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -85,7 +85,8 @@ const Home = ({navigation}) => {
         isVisible={isModalVisible}>
         <View style={styles.alignFooterTextAndButton}>
           <Text style={styles.footerStatementText}>
-            We do not sell your personal information to anyone.
+            We value your privacy. 
+            We do not save any information about our users.
           </Text>
           <TouchableOpacity
             style={styles.buttonFooter}

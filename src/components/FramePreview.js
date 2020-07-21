@@ -30,10 +30,13 @@ export default function FramePreview({route, navigation}) {
     },
   };
   const passElement = [];
+
   element.map((data) => {
     data.element_tag === tag ? passElement.push(data) : null;
   });
+
   const [elementSource, setElementSource] = React.useState();
+  const [elementName, setElementName] = React.useState();
   const onPressAdjustPicture = () => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
@@ -50,6 +53,7 @@ export default function FramePreview({route, navigation}) {
         navigation.navigate('AdjustPicture', {
           imageSource: source,
           elementSource: elementSource,
+          elementName: elementName
         });
         console.log(elementSource);
       }
@@ -59,20 +63,20 @@ export default function FramePreview({route, navigation}) {
   const carousel = useRef(); // ref for Carousel component to be used in next and previous frame button
   const [frameCurrIndex, setFrameCurrIndex] = React.useState(0);
   async function onPressNextFrameButton() {
-    carousel.current.snapToNext();
+    carousel.current.snapToItem(frameCurrIndex + 1);
     swiper.current.scrollBy(1); // swipe frame to next frame
     setFrameCurrIndex(frameCurrIndex + 1);
-    console.log(frameCurrIndex);
   }
   async function onPressPrevFrameButton() {
-    carousel.current.snapToPrev();
+    carousel.current.snapToItem(frameCurrIndex - 1);
     swiper.current.scrollBy(-1); // swiper frame to previous frame
     setFrameCurrIndex(frameCurrIndex - 1);
-    console.log(frameCurrIndex);
   }
+
   const renderFrames = ({item, index}) => {
     if (frameCurrIndex === index) {
       setElementSource(item.element_img);
+      setElementName(item.element_name);
     }
     return item.element_tag === tag ? (
       <TouchableOpacity

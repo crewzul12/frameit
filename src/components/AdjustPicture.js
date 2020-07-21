@@ -22,13 +22,13 @@ export default function AdjustPicture({route, navigation}) {
     pan.setValue({x: 0, y: 0});
     panFrame.setValue({x: 0, y: 0});
   }
-  const {imageSource, elementSource} = route.params;
+  const {imageSource, elementSource, elementName} = route.params;
  
   const onPressFramePreview = () => navigation.navigate('FramePreview');
   const viewShot = useRef();
   const onPressRouteSaveImage = () => {
     viewShot.current.capture().then((uri) => {
-      navigation.navigate('SaveImage', {uri: uri});
+      navigation.navigate('SaveImage', {uri: uri, elementName: elementName});
     });
   };
   const pan = useRef(new Animated.ValueXY()).current;

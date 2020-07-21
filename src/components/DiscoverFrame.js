@@ -164,12 +164,51 @@ export default function DiscoverFrame({navigation}) {
         containerStyle={{flex: 1}}
         isLoading={loading}
         layout={[
-          {key: 'loadingTags', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
-          {key: 'loadingFrames', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
-          {key: 'loadingTags2', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
-          {key: 'loadingFrames2', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
-          {key: 'loadingTags3', width: 220, height: '7%', marginBottom: '6%', marginLeft: '5%', marginTop: '6%'},
-          {key: 'loadingFrames3', width: 180, height: '20%', marginBottom: 6, marginLeft: '10%'},
+          {
+            key: 'loadingTags',
+            width: 220,
+            height: '7%',
+            marginBottom: '6%',
+            marginLeft: '5%',
+            marginTop: '6%',
+          },
+          {
+            key: 'loadingFrames',
+            width: 180,
+            height: '20%',
+            marginBottom: 6,
+            marginLeft: '10%',
+          },
+          {
+            key: 'loadingTags2',
+            width: 220,
+            height: '7%',
+            marginBottom: '6%',
+            marginLeft: '5%',
+            marginTop: '6%',
+          },
+          {
+            key: 'loadingFrames2',
+            width: 180,
+            height: '20%',
+            marginBottom: 6,
+            marginLeft: '10%',
+          },
+          {
+            key: 'loadingTags3',
+            width: 220,
+            height: '7%',
+            marginBottom: '6%',
+            marginLeft: '5%',
+            marginTop: '6%',
+          },
+          {
+            key: 'loadingFrames3',
+            width: 180,
+            height: '20%',
+            marginBottom: 6,
+            marginLeft: '10%',
+          },
         ]}>
         <ScrollView scrollEventThrottle={16}>
           <View style={styles.spaceTagsContent}>

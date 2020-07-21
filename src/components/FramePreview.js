@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {
   View,
   Text,
@@ -29,14 +29,13 @@ export default function FramePreview({route, navigation}) {
       path: 'images',
     },
   };
+  let elementSrc = '';
+  let elementName = '';
   const passElement = [];
 
   element.map((data) => {
     data.element_tag === tag ? passElement.push(data) : null;
   });
-
-  const [elementSource, setElementSource] = React.useState();
-  const [elementName, setElementName] = React.useState();
   const onPressAdjustPicture = () => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
@@ -52,10 +51,9 @@ export default function FramePreview({route, navigation}) {
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
         navigation.navigate('AdjustPicture', {
           imageSource: source,
-          elementSource: elementSource,
-          elementName: elementName
+          elementSource: elementSrc,
+          elementName: elementName,
         });
-        console.log(elementSource);
       }
     });
   };
@@ -72,11 +70,10 @@ export default function FramePreview({route, navigation}) {
     swiper.current.scrollBy(-1); // swiper frame to previous frame
     setFrameCurrIndex(frameCurrIndex - 1);
   }
-
   const renderFrames = ({item, index}) => {
     if (frameCurrIndex === index) {
-      setElementSource(item.element_img);
-      setElementName(item.element_name);
+      elementSrc = item.element_img;
+      elementName = item.element_name;
     }
     return item.element_tag === tag ? (
       <TouchableOpacity

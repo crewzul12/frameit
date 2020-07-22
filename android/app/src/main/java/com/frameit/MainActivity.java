@@ -3,6 +3,10 @@ import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; 
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -11,8 +15,10 @@ public class MainActivity extends ReactActivity {
    */
  @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.show(this);  // here 
-        super.onCreate(savedInstanceState);
+      SplashScreen.show(this);  // here 
+      super.onCreate(savedInstanceState);
+
+      MobileAds.initialize(this, "ca-app-pub-6535556449450935~8406996764");
     }
   @Override
   protected String getMainComponentName() {

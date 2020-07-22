@@ -16,7 +16,10 @@ import SaveImage from './src/components/SaveImage';
 
 // Admobs integration
 import admob, { MaxAdContentRating, BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
-const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-6535556449450935~8406996764';
+const adUnitId = 'ca-app-pub-6535556449450935/1998103725';
+
+// Test id
+// const adUnitId = 'ca-app-pub-3940256099942544/6300978111';
 
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
@@ -64,6 +67,14 @@ const Home = ({navigation}) => {
           size={BannerAdSize.FULL_BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
+          }}
+          
+          //advert status log
+          onAdLoaded={() => {
+            console.log('Advert loaded');
+          }}
+          onAdFailedToLoad={(error) => {
+            console.error('Advert failed to load: ', error);
           }}
         />
         </View>

@@ -15,14 +15,10 @@ public class MainActivity extends ReactActivity {
    */
  @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.show(this);  // here 
-        super.onCreate(savedInstanceState);
+      SplashScreen.show(this);  // here 
+      super.onCreate(savedInstanceState);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+      MobileAds.initialize(this, "ca-app-pub-6535556449450935~8406996764");
     }
   @Override
   protected String getMainComponentName() {

@@ -31,21 +31,21 @@ const Home = ({navigation}) => {
     // After having done stuff (such as async tasks) hide the splash screen
     let mounted = true;
     if (mounted) {
-      admob()
-      .setRequestConfiguration({
-        // Update all future requests suitable for parental guidance
-        maxAdContentRating: MaxAdContentRating.PG,
+      // admob()
+      // .setRequestConfiguration({
+      //   // Update all future requests suitable for parental guidance
+      //   maxAdContentRating: MaxAdContentRating.PG,
 
-        // Indicates that you want your content treated as child-directed for purposes of COPPA.
-        tagForChildDirectedTreatment: true,
+      //   // Indicates that you want your content treated as child-directed for purposes of COPPA.
+      //   tagForChildDirectedTreatment: true,
 
-        // Indicates that you want the ad request to be handled in a
-        // manner suitable for users under the age of consent.
-        tagForUnderAgeOfConsent: true,
-      })
-      .then(() => {
-        // Request config successfully set!
-      });
+      //   // Indicates that you want the ad request to be handled in a
+      //   // manner suitable for users under the age of consent.
+      //   tagForUnderAgeOfConsent: true,
+      // })
+      // .then(() => {
+      //   // Request config successfully set!
+      // });
       
       requestMultiple([
         PERMISSIONS.ANDROID.CAMERA,

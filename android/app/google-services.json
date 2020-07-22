@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1065863206438",
+    "firebase_url": "https://frameit-9caec.firebaseio.com",
+    "project_id": "frameit-9caec",
+    "storage_bucket": "frameit-9caec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065863206438:android:af1ea09f29e88902bbb8e7",
+        "android_client_info": {
+          "package_name": "com.frameit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065863206438-4h7ii0hm1s83b3t1imqfrn6ecru4edst.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSy0C09c3ytiSqy9y1jwgg6yEnRC3al94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065863206438-4h7ii0hm1s83b3t1imqfrn6ecru4edst.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

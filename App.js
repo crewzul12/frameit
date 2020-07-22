@@ -14,6 +14,10 @@ import FramePreview from './src/components/FramePreview';
 import AdjustPicture from './src/components/AdjustPicture';
 import SaveImage from './src/components/SaveImage';
 
+// Admobs integration
+import admob, { MaxAdContentRating, BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-6535556449450935~8406996764';
+
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -24,6 +28,22 @@ const Home = ({navigation}) => {
     // After having done stuff (such as async tasks) hide the splash screen
     let mounted = true;
     if (mounted) {
+      admob()
+      .setRequestConfiguration({
+        // Update all future requests suitable for parental guidance
+        maxAdContentRating: MaxAdContentRating.PG,
+
+        // Indicates that you want your content treated as child-directed for purposes of COPPA.
+        tagForChildDirectedTreatment: true,
+
+        // Indicates that you want the ad request to be handled in a
+        // manner suitable for users under the age of consent.
+        tagForUnderAgeOfConsent: true,
+      })
+      .then(() => {
+        // Request config successfully set!
+      });
+      
       requestMultiple([
         PERMISSIONS.ANDROID.CAMERA,
         PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
@@ -39,7 +59,13 @@ const Home = ({navigation}) => {
     <View style={styles.outerContainer}>
       <View style={styles.spaceMainContentAndFooter}>
         <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>
-          <Text style={styles.adsBannerText}>Ads Banner here</Text>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.FULL_BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
         </View>
         <View style={styles.alignAppNameAndLogo}>
           <Text style={styles.appNameHeaderText}>Frame-It!</Text>

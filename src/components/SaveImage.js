@@ -7,6 +7,15 @@ import ShareIcon from '../../assets/icons/share-alt.svg';
 import CameraRoll from '@react-native-community/cameraroll';
 import Modal from 'react-native-modal';
 import Share from 'react-native-share';
+import {
+  HMSBanner,
+  BannerAdSizes,
+  ContentClassification,
+  Gender,
+  NonPersonalizedAd,
+  TagForChild,
+  UnderAge,
+} from 'react-native-hms-ads';
 
 export default function SaveImage({route, navigation}) {
   const {uri, elementName} = route.params; // Receiver params from AdjustPicture component
@@ -48,7 +57,35 @@ export default function SaveImage({route, navigation}) {
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>
-        <Text style={styles.adsBannerText}>Ads Banner here</Text>
+        <HMSBanner
+          style={{height: 100}}
+          bannerAdSize={{
+            bannerAdSize: BannerAdSizes.B_PORTRAIT,
+            width: 300,
+          }}
+          adId="a30mm2xhrq" // <== your ad slot id goes here
+          adParam={{
+            // specific ads for special ad audience
+            adContentClassification:
+              ContentClassification.AD_CONTENT_CLASSIFICATION_UNKOWN,
+            gender: Gender.UNKNOWN,
+            nonPersonalizedAd: NonPersonalizedAd.ALLOW_ALL,
+            tagForChildProtection:
+              TagForChild.TAG_FOR_CHILD_PROTECTION_UNSPECIFIED,
+            tagForUnderAgeOfPromise: UnderAge.PROMISE_UNSPECIFIED,
+          }}
+          onAdLoaded={(e) => {
+            console.log('HMSBanner onAdLoaded', e.nativeEvent);
+          }}
+          onAdFailed={(e) => {
+            console.warn('HMSBanner onAdFailed', e.nativeEvent);
+          }}
+          onAdOpened={(e) => console.log('HMSBanner onAdOpened')}
+          onAdClicked={(e) => console.log('HMSBanner onAdClicked')}
+          onAdClosed={(e) => console.log('HMSBanner onAdClosed')}
+          onAdImpression={(e) => console.log('HMSBanner onAdImpression')}
+          onAdLeave={(e) => console.log('HMSBanner onAdLeave')}
+        />
       </View>
       <View style={[styles.headerBar, stylesPlus.addBannerShadow]}>
         <BackButtonIcon
@@ -74,7 +111,9 @@ export default function SaveImage({route, navigation}) {
         <Text style={styles.frameDetailsText}>
           Date Created: {date + '/' + month + '/' + year}
         </Text>
-        <Text style={styles.frameDetailsText}>Time Created: {hours + ':' + min + ':' + sec}</Text>
+        <Text style={styles.frameDetailsText}>
+          Time Created: {hours + ':' + min + ':' + sec}
+        </Text>
         <Text style={styles.frameDetailsText}>Frame: {elementName}</Text>
       </View>
       <View style={styles.alignButtons}>

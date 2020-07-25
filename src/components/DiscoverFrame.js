@@ -16,6 +16,15 @@ import SearchIcon from '../../assets/icons/search.svg';
 import {REACT_APP_API_KEY} from '@env';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 const axios = require('axios');
+import {
+  HMSBanner,
+  BannerAdSizes,
+  ContentClassification,
+  Gender,
+  NonPersonalizedAd,
+  TagForChild,
+  UnderAge,
+} from 'react-native-hms-ads';
 
 const {width} = Dimensions.get('window');
 const PADDING = 16;
@@ -110,7 +119,35 @@ export default function DiscoverFrame({navigation}) {
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>
-        <Text style={styles.adsBannerText}>Ads Banner here</Text>
+        <HMSBanner
+          style={{height: 100}}
+          bannerAdSize={{
+            bannerAdSize: BannerAdSizes.B_PORTRAIT,
+            width: 300,
+          }}
+          adId="a30mm2xhrq" // <== your ad slot id goes here
+          adParam={{
+            // specific ads for special ad audience
+            adContentClassification:
+              ContentClassification.AD_CONTENT_CLASSIFICATION_UNKOWN,
+            gender: Gender.UNKNOWN,
+            nonPersonalizedAd: NonPersonalizedAd.ALLOW_ALL,
+            tagForChildProtection:
+              TagForChild.TAG_FOR_CHILD_PROTECTION_UNSPECIFIED,
+            tagForUnderAgeOfPromise: UnderAge.PROMISE_UNSPECIFIED,
+          }}
+          onAdLoaded={(e) => {
+            console.log('HMSBanner onAdLoaded', e.nativeEvent);
+          }}
+          onAdFailed={(e) => {
+            console.warn('HMSBanner onAdFailed', e.nativeEvent);
+          }}
+          onAdOpened={(e) => console.log('HMSBanner onAdOpened')}
+          onAdClicked={(e) => console.log('HMSBanner onAdClicked')}
+          onAdClosed={(e) => console.log('HMSBanner onAdClosed')}
+          onAdImpression={(e) => console.log('HMSBanner onAdImpression')}
+          onAdLeave={(e) => console.log('HMSBanner onAdLeave')}
+        />
       </View>
       {searchActive ? (
         <View style={[styles.headerBar, stylesPlus.addBannerShadow]}>

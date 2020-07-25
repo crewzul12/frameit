@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.huawei.hms.rn.ads.RNHMSAdsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
+          //Add following line. Don't forget to add import statement also.
+          packages.add(new RNHMSAdsPackage());
           return packages;
         }
 

@@ -13,6 +13,15 @@ import {PERMISSIONS, request, requestMultiple} from 'react-native-permissions';
 import FramePreview from './src/components/FramePreview';
 import AdjustPicture from './src/components/AdjustPicture';
 import SaveImage from './src/components/SaveImage';
+import {
+  HMSBanner,
+  BannerAdSizes,
+  ContentClassification,
+  Gender,
+  NonPersonalizedAd,
+  TagForChild,
+  UnderAge,
+} from 'react-native-hms-ads';
 
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
@@ -39,7 +48,35 @@ const Home = ({navigation}) => {
     <View style={styles.outerContainer}>
       <View style={styles.spaceMainContentAndFooter}>
         <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>
-          <Text style={styles.adsBannerText}>Ads Banner here</Text>
+          <HMSBanner
+            style={{height: 100}}
+            bannerAdSize={{
+              bannerAdSize: BannerAdSizes.B_PORTRAIT,
+              width: 300,
+            }}
+            adId="a30mm2xhrq" // <== your ad slot id goes here
+            adParam={{
+              // specific ads for special ad audience
+              adContentClassification:
+                ContentClassification.AD_CONTENT_CLASSIFICATION_UNKOWN,
+              gender: Gender.UNKNOWN,
+              nonPersonalizedAd: NonPersonalizedAd.ALLOW_ALL,
+              tagForChildProtection:
+                TagForChild.TAG_FOR_CHILD_PROTECTION_UNSPECIFIED,
+              tagForUnderAgeOfPromise: UnderAge.PROMISE_UNSPECIFIED,
+            }}
+            onAdLoaded={(e) => {
+              console.log('HMSBanner onAdLoaded', e.nativeEvent);
+            }}
+            onAdFailed={(e) => {
+              console.warn('HMSBanner onAdFailed', e.nativeEvent);
+            }}
+            onAdOpened={(e) => console.log('HMSBanner onAdOpened')}
+            onAdClicked={(e) => console.log('HMSBanner onAdClicked')}
+            onAdClosed={(e) => console.log('HMSBanner onAdClosed')}
+            onAdImpression={(e) => console.log('HMSBanner onAdImpression')}
+            onAdLeave={(e) => console.log('HMSBanner onAdLeave')}
+          />
         </View>
         <View style={styles.alignAppNameAndLogo}>
           <Text style={styles.appNameHeaderText}>Frame-It!</Text>
@@ -85,8 +122,8 @@ const Home = ({navigation}) => {
         isVisible={isModalVisible}>
         <View style={styles.alignFooterTextAndButton}>
           <Text style={styles.footerStatementText}>
-            We value your privacy. 
-            We do not save any information about our users.
+            We value your privacy. We do not save any information about our
+            users.
           </Text>
           <TouchableOpacity
             style={styles.buttonFooter}

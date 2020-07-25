@@ -11,7 +11,7 @@ import {
 
 import CodePush from "react-native-code-push";
 
-class Codepush extends Component {
+class Update extends Component {
   constructor() {
     super();
     this.state = { restartAllowed: true };
@@ -46,63 +46,25 @@ class Codepush extends Component {
     }
   }
 
-  codePushDownloadDidProgress(progress) {
-    this.setState({ progress });
-  }
-
-  toggleAllowRestart() {
-    this.state.restartAllowed
-      ? CodePush.disallowRestart()
-      : CodePush.allowRestart();
-
-    this.setState({ restartAllowed: !this.state.restartAllowed });
-  }
-
   /** Update is downloaded silently, and applied on restart (recommended) */
   sync() {
     CodePush.sync(
       {},
-      this.codePushStatusDidChange.bind(this),
-      this.codePushDownloadDidProgress.bind(this)
-    );
-  }
-
-  /** Update pops a confirmation dialog, and then immediately reboots the app */
-  syncImmediate() {
-    CodePush.sync(
-      { installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true },
-      this.codePushStatusDidChange.bind(this),
-      this.codePushDownloadDidProgress.bind(this)
+      this.codePushStatusDidChange.bind(this)
     );
   }
 
   render() {
-    let progressView;
-
-    if (this.state.progress) {
-      progressView = (
-        <Text style={styles.messages}>{this.state.progress.receivedBytes} of {this.state.progress.totalBytes} bytes received</Text>
-      );
-    }
-
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.sync.bind(this)}>
-          <Text style={styles.syncButton}>Press for background sync</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.syncImmediate.bind(this)}>
-          <Text style={styles.syncButton}>Press for dialog-driven sync</Text>
-        </TouchableOpacity>
-        {progressView}
-        <TouchableOpacity onPress={this.toggleAllowRestart.bind(this)}>
-          <Text style={styles.restartToggleButton}>Restart { this.state.restartAllowed ? "allowed" : "forbidden"}</Text>
+          <Text style={styles.syncButton}>Check for updates</Text>
         </TouchableOpacity>
         <Text style={styles.messages}>{this.state.syncMessage || ""}</Text>
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,31 +73,21 @@ const styles = StyleSheet.create({
     paddingTop: 50
   },
   messages: {
-    marginTop: 30,
+    marginTop: 10,
     textAlign: "center",
-  },
-  restartToggleButton: {
-    color: "blue",
-    fontSize: 17
   },
   syncButton: {
     color: "green",
-    fontSize: 24
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 20
+    fontSize: 17
   },
 });
 
-/**
- * Configured with a MANUAL check frequency for easy testing. For production apps, it is recommended to configure a
- * different check frequency, such as ON_APP_START, for a 'hands-off' approach where CodePush.sync() does not
- * need to be explicitly called. All options of CodePush.sync() are also available in this decorator.
- */
-let codePushOptions = { checkFrequency: CodePush.CheckFrequency.MANUAL };
+let codePushOptions = { 
+  updateDialog: true,
+  installMode: CodePush.InstallMode.IMMEDIATE,
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START 
+};
 
-Codepush = CodePush(codePushOptions)(Codepush);
+Update = CodePush(codePushOptions)(Update);
 
-export default Codepush;
+export default Update;

@@ -13,7 +13,7 @@ import {PERMISSIONS, request, requestMultiple} from 'react-native-permissions';
 import FramePreview from './src/components/FramePreview';
 import AdjustPicture from './src/components/AdjustPicture';
 import SaveImage from './src/components/SaveImage';
-import Codepush from './Codepush';
+import Update from "./Update";
 
 // Admobs integration
 import admob, { MaxAdContentRating, BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
@@ -79,8 +79,8 @@ const Home = ({navigation}) => {
         </View>
         <View style={styles.alignAppNameAndLogo}>
           <Text style={styles.appNameHeaderText}>Frame-It!</Text>
-          <Codepush />
           <FrameItLogo width="50%" height="50%" style={styles.frameItLogo} />
+          <Update />
         </View>
         <View style={styles.alignButtons}>
           <View style={styles.alignButtonWithText}>

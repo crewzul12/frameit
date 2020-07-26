@@ -25,12 +25,23 @@ import {
   TagForChild,
   UnderAge,
 } from 'react-native-hms-ads';
+import haSDK from 'react-native-ha-interface';
 
 const {width} = Dimensions.get('window');
 const PADDING = 16;
 const SEARCH_FULL_WIDTH = width - PADDING * 2; //search_width when unfocused
 const SEARCH_SHRINK_WIDTH = width - PADDING - 70; //search_width when focused
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
+function haOnEvent() {
+  const eventObj = {
+    testString: 'StrContent',
+    testInt: 20,
+    testDouble: 2.2,
+    testBoolean: false,
+  };
+  haSDK.onEvent('newTestEvent', eventObj);
+}
 export default function DiscoverFrame({navigation}) {
   const [element, setElement] = useState(); // Render all element
   const tags = [
@@ -71,7 +82,9 @@ export default function DiscoverFrame({navigation}) {
         }),
       ]).start();
     };
-
+  useEffect(() => {
+    haOnEvent();
+  }, []);
   useEffect(() => {
     let unmounted = false;
     let source = axios.CancelToken.source();

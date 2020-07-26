@@ -25,7 +25,17 @@ import {
   TagForChild,
   UnderAge,
 } from 'react-native-hms-ads';
+import haSDK from 'react-native-ha-interface';
 
+function haOnEvent() {
+  const eventObj = {
+    testString: 'StrContent',
+    testInt: 20,
+    testDouble: 2.2,
+    testBoolean: false,
+  };
+  haSDK.onEvent('newTestEvent', eventObj);
+}
 export default function AdjustPicture({route, navigation}) {
   async function onPressSetPrevPan() {
     pan.setValue({x: 0, y: 0});
@@ -79,6 +89,9 @@ export default function AdjustPicture({route, navigation}) {
       },
     }),
   ).current;
+  useEffect(() => {
+    haOnEvent();
+  }, [])
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>

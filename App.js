@@ -22,7 +22,19 @@ import {
   TagForChild,
   UnderAge,
 } from 'react-native-hms-ads';
+import haSDK from 'react-native-ha-interface';
 
+// Compile the haOnEvent function to call the onEvent API in the SDK.
+// eventObj is the parameter object contained in the custom event that you want to upload. The parameter can be of the string, number, and bool types.
+function haOnEvent() {
+  const eventObj = {
+    testString: 'StrContent',
+    testInt: 20,
+    testDouble: 2.2,
+    testBoolean: false,
+  };
+  haSDK.onEvent('newTestEvent', eventObj);
+}
 const Stack = createStackNavigator();
 const Home = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -44,6 +56,9 @@ const Home = ({navigation}) => {
       mounted = false;
     };
   });
+  useEffect(() => {
+    haOnEvent();
+  }, [])
   return (
     <View style={styles.outerContainer}>
       <View style={styles.spaceMainContentAndFooter}>
@@ -137,6 +152,9 @@ const Home = ({navigation}) => {
 };
 
 const App = () => {
+  useEffect(() => {
+    haOnEvent();
+  }, [])
   return (
     <NavigationContainer>
       <Stack.Navigator>

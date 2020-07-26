@@ -8,3 +8,13 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-keep class com.hianalytics.android.**{*;}
+-keep class com.huawei.updatesdk.**{*;}
+-keep class com.huawei.hms.**{*;}
+-keep interface com.huawei.hms.analytics.type.HAEventType{*;}
+-keep interface com.huawei.hms.analytics.type.HAParamType{*;}
+-keep class com.huawei.hianalytics.CommonUtil{*;}
+-keep class com.huawei.hianalytics.HaInterfaceModule{*;}
+-keep class com.huawei.hianalytics.HaInterfacePackage{*;}
+-keep class com.huawei.hianalytics.HaSdkInitProvider{*;}
+-keep class com.huawei.hianalytics.LifeCycleListener{*;}

@@ -16,7 +16,17 @@ import {
   TagForChild,
   UnderAge,
 } from 'react-native-hms-ads';
+import haSDK from 'react-native-ha-interface';
 
+function haOnEvent() {
+  const eventObj = {
+    testString: 'StrContent',
+    testInt: 20,
+    testDouble: 2.2,
+    testBoolean: false,
+  };
+  haSDK.onEvent('newTestEvent', eventObj);
+}
 export default function SaveImage({route, navigation}) {
   const {uri, elementName} = route.params; // Receiver params from AdjustPicture component
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -54,6 +64,9 @@ export default function SaveImage({route, navigation}) {
   var hours = new Date().getHours(); //Current Hours
   var min = new Date().getMinutes(); //Current Minutes
   var sec = new Date().getSeconds(); //Current Seconds
+  useEffect(() => {
+    haOnEvent();
+  }, [])
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>

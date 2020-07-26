@@ -27,7 +27,17 @@ import {
   TagForChild,
   UnderAge,
 } from 'react-native-hms-ads';
+import haSDK from 'react-native-ha-interface';
 
+function haOnEvent() {
+  const eventObj = {
+    testString: 'StrContent',
+    testInt: 20,
+    testDouble: 2.2,
+    testBoolean: false,
+  };
+  haSDK.onEvent('newTestEvent', eventObj);
+}
 export default function FramePreview({route, navigation}) {
   const {tag, element} = route.params; // receive parameter from DiscoverFrame component
   const onPressDiscoverFrame = () => navigation.navigate('DiscoverFrame'); // navigate to Discover Frame page
@@ -95,6 +105,9 @@ export default function FramePreview({route, navigation}) {
       </TouchableOpacity>
     ) : null;
   };
+  useEffect(() => {
+    haOnEvent();
+  }, []);
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.adsBanner, stylesPlus.addBannerShadow]}>

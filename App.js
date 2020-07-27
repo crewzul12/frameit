@@ -23,6 +23,7 @@ import {
   UnderAge,
 } from 'react-native-hms-ads';
 import haSDK from 'react-native-ha-interface';
+import Update from "./Update";
 
 // Compile the haOnEvent function to call the onEvent API in the SDK.
 // eventObj is the parameter object contained in the custom event that you want to upload. The parameter can be of the string, number, and bool types.
@@ -96,6 +97,7 @@ const Home = ({navigation}) => {
         <View style={styles.alignAppNameAndLogo}>
           <Text style={styles.appNameHeaderText}>Frame-It!</Text>
           <FrameItLogo width="50%" height="50%" style={styles.frameItLogo} />
+          <Update />
         </View>
         <View style={styles.alignButtons}>
           <View style={styles.alignButtonWithText}>

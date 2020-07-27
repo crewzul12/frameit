@@ -82,6 +82,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -96,7 +97,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -157,6 +158,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"0cwgqFO1qQrDM-6oJlQupqMm62BA6mKoVjcgU"'
+            // Note: It is a good idea to provide matchingFallbacks for the new buildType you create to prevent build issues
+            // Add the following line if not already there
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -165,6 +173,8 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
+            resValue "string", "CodePushDeploymentKey", '"L9ml17wLNumatQMn7XpY6bSoeWp59NOa6DdVL"'
+            minifyEnabled true
         }
     }
 

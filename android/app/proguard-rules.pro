@@ -18,3 +18,4 @@
 -keep class com.huawei.hianalytics.HaInterfacePackage{*;}
 -keep class com.huawei.hianalytics.HaSdkInitProvider{*;}
 -keep class com.huawei.hianalytics.LifeCycleListener{*;}
+-keep public class com.horcrux.svg.** {*;}
